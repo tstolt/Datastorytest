@@ -1,0 +1,2031 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Datasets and Preprocessing &#8212; My Jupyter Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'cleaned_data';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="The relation between electric vehicles and air quality in New York City" href="DataStories.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="DataStories.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">My Jupyter Book</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="DataStories.html">
+                    <center> The relation between electric vehicles and air quality in New York City </center>
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Datasets and Preprocessing</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/cleaned_data.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Datasets and Preprocessing</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="datasets-and-preprocessing">
+<h1>Datasets and Preprocessing<a class="headerlink" href="#datasets-and-preprocessing" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Electric_Vehicle_Charging_Stations_in_New_York.csv&quot;</span><span class="p">)</span>
+<span class="n">columns_to_keep</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Fuel Type Code&#39;</span><span class="p">,</span> <span class="s1">&#39;Station Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Street Adress&#39;</span><span class="p">,</span> <span class="s1">&#39;City&#39;</span><span class="p">,</span> <span class="s1">&#39;State&#39;</span><span class="p">,</span> <span class="s1">&#39;ZIP&#39;</span><span class="p">,</span>  <span class="s1">&#39;EV Network&#39;</span><span class="p">,</span> <span class="s1">&#39;Date Last Confirmed&#39;</span><span class="p">,</span> <span class="s1">&#39;ID&#39;</span><span class="p">,</span> <span class="s1">&#39;Open Date&#39;</span><span class="p">,</span> <span class="s1">&#39;EV Connector Types&#39;</span><span class="p">]</span>
+<span class="n">df1</span> <span class="o">=</span> <span class="n">df1</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df1</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">col</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">columns_to_keep</span><span class="p">])</span>
+<span class="n">cities_to_filter</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;New York&#39;</span><span class="p">,</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span> <span class="s1">&#39;Staten Island&#39;</span><span class="p">,</span> <span class="s1">&#39;Bronx&#39;</span><span class="p">,</span> <span class="s1">&#39;Queens&#39;</span><span class="p">]</span>
+<span class="n">df1</span> <span class="o">=</span> <span class="n">df1</span><span class="p">[</span><span class="n">df1</span><span class="p">[</span><span class="s1">&#39;City&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">cities_to_filter</span><span class="p">)]</span>
+
+<span class="n">df1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Fuel Type Code</th>
+      <th>Station Name</th>
+      <th>City</th>
+      <th>State</th>
+      <th>ZIP</th>
+      <th>EV Network</th>
+      <th>Date Last Confirmed</th>
+      <th>ID</th>
+      <th>Open Date</th>
+      <th>EV Connector Types</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>14</th>
+      <td>ELEC</td>
+      <td>Queens Center - Tesla Supercharger</td>
+      <td>Queens</td>
+      <td>NY</td>
+      <td>11373</td>
+      <td>Tesla</td>
+      <td>10/03/2022</td>
+      <td>116809</td>
+      <td>12/01/2018</td>
+      <td>TESLA</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>ELEC</td>
+      <td>626 Sheepshead Bay Rd - Parking</td>
+      <td>Brooklyn</td>
+      <td>NY</td>
+      <td>11224</td>
+      <td>Blink Network</td>
+      <td>06/17/2023</td>
+      <td>197548</td>
+      <td>10/08/2021</td>
+      <td>J1772</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>ELEC</td>
+      <td>STATION 4TH FL MOTORGATE 3</td>
+      <td>New York</td>
+      <td>NY</td>
+      <td>10044</td>
+      <td>ChargePoint Network</td>
+      <td>06/18/2023</td>
+      <td>168524</td>
+      <td>11/17/2020</td>
+      <td>J1772</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>ELEC</td>
+      <td>Angelina's Ristorante - Tesla Destination</td>
+      <td>Staten Island</td>
+      <td>NY</td>
+      <td>10307</td>
+      <td>Tesla Destination</td>
+      <td>10/06/2022</td>
+      <td>115240</td>
+      <td>01/11/2016</td>
+      <td>TESLA</td>
+    </tr>
+    <tr>
+      <th>52</th>
+      <td>ELEC</td>
+      <td>LIN-DAN RICK</td>
+      <td>New York</td>
+      <td>NY</td>
+      <td>10010</td>
+      <td>ChargePoint Network</td>
+      <td>06/18/2023</td>
+      <td>205858</td>
+      <td>02/04/2022</td>
+      <td>J1772</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>3427</th>
+      <td>ELEC</td>
+      <td>iPark NYC 333 E 38th NYU - Tesla Destination</td>
+      <td>New York</td>
+      <td>NY</td>
+      <td>10016</td>
+      <td>Tesla Destination</td>
+      <td>10/06/2022</td>
+      <td>115101</td>
+      <td>12/14/2015</td>
+      <td>J1772 TESLA</td>
+    </tr>
+    <tr>
+      <th>3428</th>
+      <td>ELEC</td>
+      <td>Icon Parking 225 W 83 Street - Tesla Destination</td>
+      <td>New York</td>
+      <td>NY</td>
+      <td>10024</td>
+      <td>Tesla Destination</td>
+      <td>10/06/2022</td>
+      <td>115058</td>
+      <td>04/30/2016</td>
+      <td>J1772 TESLA</td>
+    </tr>
+    <tr>
+      <th>3431</th>
+      <td>ELEC</td>
+      <td>182 E 73rd St</td>
+      <td>New York</td>
+      <td>NY</td>
+      <td>10021</td>
+      <td>LIVINGSTON</td>
+      <td>02/13/2023</td>
+      <td>252709</td>
+      <td>12/06/2022</td>
+      <td>J1772</td>
+    </tr>
+    <tr>
+      <th>3435</th>
+      <td>ELEC</td>
+      <td>200 Liberty</td>
+      <td>New York</td>
+      <td>NY</td>
+      <td>10006</td>
+      <td>AMPUP</td>
+      <td>10/11/2022</td>
+      <td>229902</td>
+      <td>09/15/2022</td>
+      <td>J1772</td>
+    </tr>
+    <tr>
+      <th>3441</th>
+      <td>ELEC</td>
+      <td>610 Warren Street - Tesla Destination</td>
+      <td>Brooklyn</td>
+      <td>NY</td>
+      <td>11217</td>
+      <td>Tesla Destination</td>
+      <td>10/06/2022</td>
+      <td>168558</td>
+      <td>06/16/2017</td>
+      <td>TESLA</td>
+    </tr>
+  </tbody>
+</table>
+<p>537 rows × 10 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Air_Quality.csv&quot;</span><span class="p">)</span>
+<span class="n">emission_type</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Nitrogen Dioxide (NO2)&#39;</span><span class="p">,</span> <span class="s1">&#39;Fine Particulate Matter (PM2.5)&#39;</span><span class="p">]</span>
+<span class="n">annual_average</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Annual Average 2009&#39;</span><span class="p">,</span> <span class="s1">&#39;Annual Average 2010&#39;</span><span class="p">,</span> <span class="s1">&#39;Annual Average 2011&#39;</span><span class="p">,</span> <span class="s1">&#39;Annual Average 2012&#39;</span><span class="p">,</span> <span class="s1">&#39;Annual Average 2013&#39;</span><span class="p">,</span> <span class="s1">&#39;Annual Average 2014&#39;</span><span class="p">,</span> <span class="s1">&#39;Annual Average 2015&#39;</span><span class="p">,</span> <span class="s1">&#39;Annual Average 2016&#39;</span><span class="p">,</span> <span class="s1">&#39;Annual Average 2017&#39;</span><span class="p">,</span> <span class="s1">&#39;Annual Average 2018&#39;</span><span class="p">,</span> <span class="s1">&#39;Annual Average 2019&#39;</span><span class="p">,</span> <span class="s1">&#39;Annual Average 2020&#39;</span><span class="p">]</span>
+
+<span class="n">df2</span> <span class="o">=</span> <span class="n">df2</span><span class="p">[</span><span class="n">df2</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">emission_type</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">df2</span><span class="p">[</span><span class="s1">&#39;Time Period&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">annual_average</span><span class="p">)]</span>
+
+<span class="n">df2</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unique ID</th>
+      <th>Indicator ID</th>
+      <th>Name</th>
+      <th>Measure</th>
+      <th>Measure Info</th>
+      <th>Geo Type Name</th>
+      <th>Geo Join ID</th>
+      <th>Geo Place Name</th>
+      <th>Time Period</th>
+      <th>Start_Date</th>
+      <th>Data Value</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2413</th>
+      <td>167509</td>
+      <td>375</td>
+      <td>Nitrogen Dioxide (NO2)</td>
+      <td>Mean</td>
+      <td>ppb</td>
+      <td>CD</td>
+      <td>101</td>
+      <td>Financial District (CD1)</td>
+      <td>Annual Average 2009</td>
+      <td>12/01/2008</td>
+      <td>36.62</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2414</th>
+      <td>167510</td>
+      <td>375</td>
+      <td>Nitrogen Dioxide (NO2)</td>
+      <td>Mean</td>
+      <td>ppb</td>
+      <td>CD</td>
+      <td>102</td>
+      <td>Greenwich Village and Soho (CD2)</td>
+      <td>Annual Average 2009</td>
+      <td>12/01/2008</td>
+      <td>34.83</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2415</th>
+      <td>167511</td>
+      <td>375</td>
+      <td>Nitrogen Dioxide (NO2)</td>
+      <td>Mean</td>
+      <td>ppb</td>
+      <td>CD</td>
+      <td>103</td>
+      <td>Lower East Side and Chinatown (CD3)</td>
+      <td>Annual Average 2009</td>
+      <td>12/01/2008</td>
+      <td>31.80</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2416</th>
+      <td>167512</td>
+      <td>375</td>
+      <td>Nitrogen Dioxide (NO2)</td>
+      <td>Mean</td>
+      <td>ppb</td>
+      <td>CD</td>
+      <td>104</td>
+      <td>Clinton and Chelsea (CD4)</td>
+      <td>Annual Average 2009</td>
+      <td>12/01/2008</td>
+      <td>36.27</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2417</th>
+      <td>167513</td>
+      <td>375</td>
+      <td>Nitrogen Dioxide (NO2)</td>
+      <td>Mean</td>
+      <td>ppb</td>
+      <td>CD</td>
+      <td>105</td>
+      <td>Midtown (CD5)</td>
+      <td>Annual Average 2009</td>
+      <td>12/01/2008</td>
+      <td>46.75</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>15968</th>
+      <td>669970</td>
+      <td>365</td>
+      <td>Fine Particulate Matter (PM2.5)</td>
+      <td>Mean</td>
+      <td>mcg per cubic meter</td>
+      <td>CD</td>
+      <td>413</td>
+      <td>Queens Village (CD13)</td>
+      <td>Annual Average 2020</td>
+      <td>01/01/2020</td>
+      <td>5.78</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15971</th>
+      <td>669973</td>
+      <td>365</td>
+      <td>Fine Particulate Matter (PM2.5)</td>
+      <td>Mean</td>
+      <td>mcg per cubic meter</td>
+      <td>CD</td>
+      <td>414</td>
+      <td>Rockaway and Broad Channel (CD14)</td>
+      <td>Annual Average 2020</td>
+      <td>01/01/2020</td>
+      <td>5.33</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15974</th>
+      <td>669976</td>
+      <td>365</td>
+      <td>Fine Particulate Matter (PM2.5)</td>
+      <td>Mean</td>
+      <td>mcg per cubic meter</td>
+      <td>CD</td>
+      <td>501</td>
+      <td>St. George and Stapleton (CD1)</td>
+      <td>Annual Average 2020</td>
+      <td>01/01/2020</td>
+      <td>5.84</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15977</th>
+      <td>669979</td>
+      <td>365</td>
+      <td>Fine Particulate Matter (PM2.5)</td>
+      <td>Mean</td>
+      <td>mcg per cubic meter</td>
+      <td>CD</td>
+      <td>502</td>
+      <td>South Beach and Willowbrook (CD2)</td>
+      <td>Annual Average 2020</td>
+      <td>01/01/2020</td>
+      <td>5.58</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15980</th>
+      <td>669982</td>
+      <td>365</td>
+      <td>Fine Particulate Matter (PM2.5)</td>
+      <td>Mean</td>
+      <td>mcg per cubic meter</td>
+      <td>CD</td>
+      <td>503</td>
+      <td>Tottenville and Great Kills (CD3)</td>
+      <td>Annual Average 2020</td>
+      <td>01/01/2020</td>
+      <td>5.32</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>3384 rows × 12 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For the area to county mapping, we used chatgpt to sort each city into each corresponding county so we didn&#39;t have to do this manually.</span>
+<span class="c1"># </span>
+<span class="n">area_county_mapping</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Financial District (CD1)&#39;</span><span class="p">:</span> <span class="s1">&#39;Manhattan&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Greenwich Village and Soho (CD2)&#39;</span><span class="p">:</span> <span class="s1">&#39;Manhattan&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Lower East Side and Chinatown (CD3)&#39;</span><span class="p">:</span> <span class="s1">&#39;Manhattan&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Clinton and Chelsea (CD4)&#39;</span><span class="p">:</span> <span class="s1">&#39;Manhattan&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Midtown (CD5)&#39;</span><span class="p">:</span> <span class="s1">&#39;Manhattan&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Stuyvesant Town and Turtle Bay (CD6)&#39;</span><span class="p">:</span> <span class="s1">&#39;Manhattan&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Upper West Side (CD7)&#39;</span><span class="p">:</span> <span class="s1">&#39;Manhattan&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Upper East Side (CD8)&#39;</span><span class="p">:</span> <span class="s1">&#39;Manhattan&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Morningside Heights and Hamilton Heights (CD9)&#39;</span><span class="p">:</span> <span class="s1">&#39;Manhattan&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Central Harlem (CD10)&#39;</span><span class="p">:</span> <span class="s1">&#39;Manhattan&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;East Harlem (CD11)&#39;</span><span class="p">:</span> <span class="s1">&#39;Manhattan&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Washington Heights and Inwood (CD12)&#39;</span><span class="p">:</span> <span class="s1">&#39;Manhattan&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Mott Haven and Melrose (CD1)&#39;</span><span class="p">:</span> <span class="s1">&#39;Bronx&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Hunts Point and Longwood (CD2)&#39;</span><span class="p">:</span> <span class="s1">&#39;Bronx&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Morrisania and Crotona (CD3)&#39;</span><span class="p">:</span> <span class="s1">&#39;Bronx&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Highbridge and Concourse (CD4)&#39;</span><span class="p">:</span> <span class="s1">&#39;Bronx&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Fordham and University Heights (CD5)&#39;</span><span class="p">:</span> <span class="s1">&#39;Bronx&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Belmont and East Tremont (CD6)&#39;</span><span class="p">:</span> <span class="s1">&#39;Bronx&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Kingsbridge Heights and Bedford (CD7)&#39;</span><span class="p">:</span> <span class="s1">&#39;Bronx&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Riverdale and Fieldston (CD8)&#39;</span><span class="p">:</span> <span class="s1">&#39;Bronx&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Parkchester and Soundview (CD9)&#39;</span><span class="p">:</span> <span class="s1">&#39;Bronx&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Throgs Neck and Co-op City (CD10)&#39;</span><span class="p">:</span> <span class="s1">&#39;Bronx&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Morris Park and Bronxdale (CD11)&#39;</span><span class="p">:</span> <span class="s1">&#39;Bronx&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Williamsbridge and Baychester (CD12)&#39;</span><span class="p">:</span> <span class="s1">&#39;Bronx&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Greenpoint and Williamsburg (CD1)&#39;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Fort Greene and Brooklyn Heights (CD2)&#39;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Bedford Stuyvesant (CD3)&#39;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Bushwick (CD4)&#39;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;East New York and Starrett City (CD5)&#39;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Park Slope and Carroll Gardens (CD6)&#39;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Sunset Park (CD7)&#39;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Crown Heights and Prospect Heights (CD8)&#39;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;South Crown Heights and Lefferts Gardens (CD9)&#39;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Bay Ridge and Dyker Heights (CD10)&#39;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Bensonhurst (CD11)&#39;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Borough Park (CD12)&#39;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Coney Island (CD13)&#39;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Flatbush and Midwood (CD14)&#39;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Sheepshead Bay (CD15)&#39;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Brownsville (CD16)&#39;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;East Flatbush (CD17)&#39;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Flatlands and Canarsie (CD18)&#39;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Long Island City and Astoria (CD1)&#39;</span><span class="p">:</span> <span class="s1">&#39;Queens&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Woodside and Sunnyside (CD2)&#39;</span><span class="p">:</span> <span class="s1">&#39;Queens&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Jackson Heights (CD3)&#39;</span><span class="p">:</span> <span class="s1">&#39;Queens&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Elmhurst and Corona (CD4)&#39;</span><span class="p">:</span> <span class="s1">&#39;Queens&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Ridgewood and Maspeth (CD5)&#39;</span><span class="p">:</span> <span class="s1">&#39;Queens&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Rego Park and Forest Hills (CD6)&#39;</span><span class="p">:</span> <span class="s1">&#39;Queens&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Flushing and Whitestone (CD7)&#39;</span><span class="p">:</span> <span class="s1">&#39;Queens&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Hillcrest and Fresh Meadows (CD8)&#39;</span><span class="p">:</span> <span class="s1">&#39;Queens&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Kew Gardens and Woodhaven (CD9)&#39;</span><span class="p">:</span> <span class="s1">&#39;Queens&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;South Ozone Park and Howard Beach (CD10)&#39;</span><span class="p">:</span> <span class="s1">&#39;Queens&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Bayside and Little Neck (CD11)&#39;</span><span class="p">:</span> <span class="s1">&#39;Queens&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Jamaica and Hollis (CD12)&#39;</span><span class="p">:</span> <span class="s1">&#39;Queens&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Queens Village (CD13)&#39;</span><span class="p">:</span> <span class="s1">&#39;Queens&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Rockaway and Broad Channel (CD14)&#39;</span><span class="p">:</span> <span class="s1">&#39;Queens&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;St. George and Stapleton (CD1)&#39;</span><span class="p">:</span> <span class="s1">&#39;Staten Island&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;South Beach and Willowbrook (CD2)&#39;</span><span class="p">:</span> <span class="s1">&#39;Staten Island&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Tottenville and Great Kills (CD3)&#39;</span><span class="p">:</span> <span class="s1">&#39;Staten Island&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Kingsbridge - Riverdale&#39;</span><span class="p">:</span> <span class="s1">&#39;Bronx&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Northeast Bronx&#39;</span><span class="p">:</span> <span class="s1">&#39;Bronx&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Fordham - Bronx Pk&#39;</span><span class="p">:</span> <span class="s1">&#39;Bronx&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Pelham - Throgs Neck&#39;</span><span class="p">:</span> <span class="s1">&#39;Bronx&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Greenpoint&#39;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Downtown - Heights - Slope&#39;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Bedford Stuyvesant - Crown Heights&#39;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;East New York&#39;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Sunset Park&#39;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Borough Park&#39;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;East Flatbush - Flatbush&#39;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Canarsie - Flatlands&#39;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Bensonhurst - Bay Ridge&#39;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Coney Island - Sheepshead Bay&#39;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Williamsburg - Bushwick&#39;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Washington Heights&#39;</span><span class="p">:</span> <span class="s1">&#39;Manhattan&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Central Harlem - Morningside Heights&#39;</span><span class="p">:</span> <span class="s1">&#39;Manhattan&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;East Harlem&#39;</span><span class="p">:</span> <span class="s1">&#39;Manhattan&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Upper West Side&#39;</span><span class="p">:</span> <span class="s1">&#39;Manhattan&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Long Island City - Astoria&#39;</span><span class="p">:</span> <span class="s1">&#39;Queens&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;West Queens&#39;</span><span class="p">:</span> <span class="s1">&#39;Queens&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Flushing - Clearview&#39;</span><span class="p">:</span> <span class="s1">&#39;Queens&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Ridgewood - Forest Hills&#39;</span><span class="p">:</span> <span class="s1">&#39;Queens&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Southwest Queens&#39;</span><span class="p">:</span> <span class="s1">&#39;Queens&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Jamaica&#39;</span><span class="p">:</span> <span class="s1">&#39;Queens&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Southeast Queens&#39;</span><span class="p">:</span> <span class="s1">&#39;Queens&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Rockaways&#39;</span><span class="p">:</span> <span class="s1">&#39;Queens&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Upper East Side-Gramercy&#39;</span><span class="p">:</span> <span class="s1">&#39;Manhattan&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Chelsea-Village&#39;</span><span class="p">:</span> <span class="s1">&#39;Manhattan&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Union Square-Lower Manhattan&#39;</span><span class="p">:</span> <span class="s1">&#39;Manhattan&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Bayside Little Neck-Fresh Meadows&#39;</span><span class="p">:</span> <span class="s1">&#39;Queens&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Northern SI&#39;</span><span class="p">:</span> <span class="s1">&#39;Staten Island&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Southern SI&#39;</span><span class="p">:</span> <span class="s1">&#39;Staten Island&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;South Bronx&#39;</span><span class="p">:</span> <span class="s1">&#39;Bronx&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Crotona -Tremont&#39;</span><span class="p">:</span> <span class="s1">&#39;Bronx&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;High Bridge - Morrisania&#39;</span><span class="p">:</span> <span class="s1">&#39;Bronx&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Hunts Point - Mott Haven&#39;</span><span class="p">:</span> <span class="s1">&#39;Bronx&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Upper East Side&#39;</span><span class="p">:</span> <span class="s1">&#39;Manhattan&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Chelsea - Clinton&#39;</span><span class="p">:</span> <span class="s1">&#39;Manhattan&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Gramercy Park - Murray Hill&#39;</span><span class="p">:</span> <span class="s1">&#39;Manhattan&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Greenwich Village - SoHo&#39;</span><span class="p">:</span> <span class="s1">&#39;Manhattan&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Union Square - Lower East Side&#39;</span><span class="p">:</span> <span class="s1">&#39;Manhattan&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Lower Manhattan&#39;</span><span class="p">:</span> <span class="s1">&#39;Manhattan&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Bayside - Little Neck&#39;</span><span class="p">:</span> <span class="s1">&#39;Queens&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Fresh Meadows&#39;</span><span class="p">:</span> <span class="s1">&#39;Queens&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Port Richmond&#39;</span><span class="p">:</span> <span class="s1">&#39;Staten Island&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Stapleton - St. George&#39;</span><span class="p">:</span> <span class="s1">&#39;Staten Island&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Willowbrook&#39;</span><span class="p">:</span> <span class="s1">&#39;Staten Island&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;South Beach - Tottenville&#39;</span><span class="p">:</span> <span class="s1">&#39;Staten Island&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;New York City&#39;</span><span class="p">:</span> <span class="s1">&#39;Manhattan&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Bronx&#39;</span><span class="p">:</span> <span class="s1">&#39;Bronx&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Brooklyn&#39;</span><span class="p">:</span> <span class="s1">&#39;Brooklyn&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Manhattan&#39;</span><span class="p">:</span> <span class="s1">&#39;Manhattan&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Queens&#39;</span><span class="p">:</span> <span class="s1">&#39;Queens&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Staten Island&#39;</span><span class="p">:</span> <span class="s1">&#39;Staten Island&#39;</span>
+<span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">get_county</span><span class="p">(</span><span class="n">area</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">area_county_mapping</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">area</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">value</span>
+    <span class="k">return</span> <span class="s1">&#39;Unknown&#39;</span>  <span class="c1"># If the area is not found in the mapping</span>
+
+<span class="n">df2_copy</span> <span class="o">=</span> <span class="n">df2</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df2_copy</span><span class="p">[</span><span class="s1">&#39;Geo Place Name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df2_copy</span><span class="p">[</span><span class="s1">&#39;Geo Place Name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">get_county</span><span class="p">)</span>
+
+<span class="c1"># Extract the year from the string column</span>
+<span class="n">df2_copy</span><span class="p">[</span><span class="s1">&#39;Time Period&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df2_copy</span><span class="p">[</span><span class="s1">&#39;Time Period&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(\d</span><span class="si">{4}</span><span class="s1">)&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="n">df2_copy</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Unique ID</th>
+      <th>Indicator ID</th>
+      <th>Name</th>
+      <th>Measure</th>
+      <th>Measure Info</th>
+      <th>Geo Type Name</th>
+      <th>Geo Join ID</th>
+      <th>Geo Place Name</th>
+      <th>Time Period</th>
+      <th>Start_Date</th>
+      <th>Data Value</th>
+      <th>Message</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2413</th>
+      <td>167509</td>
+      <td>375</td>
+      <td>Nitrogen Dioxide (NO2)</td>
+      <td>Mean</td>
+      <td>ppb</td>
+      <td>CD</td>
+      <td>101</td>
+      <td>Manhattan</td>
+      <td>2009</td>
+      <td>12/01/2008</td>
+      <td>36.62</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2414</th>
+      <td>167510</td>
+      <td>375</td>
+      <td>Nitrogen Dioxide (NO2)</td>
+      <td>Mean</td>
+      <td>ppb</td>
+      <td>CD</td>
+      <td>102</td>
+      <td>Manhattan</td>
+      <td>2009</td>
+      <td>12/01/2008</td>
+      <td>34.83</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2415</th>
+      <td>167511</td>
+      <td>375</td>
+      <td>Nitrogen Dioxide (NO2)</td>
+      <td>Mean</td>
+      <td>ppb</td>
+      <td>CD</td>
+      <td>103</td>
+      <td>Manhattan</td>
+      <td>2009</td>
+      <td>12/01/2008</td>
+      <td>31.80</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2416</th>
+      <td>167512</td>
+      <td>375</td>
+      <td>Nitrogen Dioxide (NO2)</td>
+      <td>Mean</td>
+      <td>ppb</td>
+      <td>CD</td>
+      <td>104</td>
+      <td>Manhattan</td>
+      <td>2009</td>
+      <td>12/01/2008</td>
+      <td>36.27</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2417</th>
+      <td>167513</td>
+      <td>375</td>
+      <td>Nitrogen Dioxide (NO2)</td>
+      <td>Mean</td>
+      <td>ppb</td>
+      <td>CD</td>
+      <td>105</td>
+      <td>Manhattan</td>
+      <td>2009</td>
+      <td>12/01/2008</td>
+      <td>46.75</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>15968</th>
+      <td>669970</td>
+      <td>365</td>
+      <td>Fine Particulate Matter (PM2.5)</td>
+      <td>Mean</td>
+      <td>mcg per cubic meter</td>
+      <td>CD</td>
+      <td>413</td>
+      <td>Queens</td>
+      <td>2020</td>
+      <td>01/01/2020</td>
+      <td>5.78</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15971</th>
+      <td>669973</td>
+      <td>365</td>
+      <td>Fine Particulate Matter (PM2.5)</td>
+      <td>Mean</td>
+      <td>mcg per cubic meter</td>
+      <td>CD</td>
+      <td>414</td>
+      <td>Queens</td>
+      <td>2020</td>
+      <td>01/01/2020</td>
+      <td>5.33</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15974</th>
+      <td>669976</td>
+      <td>365</td>
+      <td>Fine Particulate Matter (PM2.5)</td>
+      <td>Mean</td>
+      <td>mcg per cubic meter</td>
+      <td>CD</td>
+      <td>501</td>
+      <td>Staten Island</td>
+      <td>2020</td>
+      <td>01/01/2020</td>
+      <td>5.84</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15977</th>
+      <td>669979</td>
+      <td>365</td>
+      <td>Fine Particulate Matter (PM2.5)</td>
+      <td>Mean</td>
+      <td>mcg per cubic meter</td>
+      <td>CD</td>
+      <td>502</td>
+      <td>Staten Island</td>
+      <td>2020</td>
+      <td>01/01/2020</td>
+      <td>5.58</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>15980</th>
+      <td>669982</td>
+      <td>365</td>
+      <td>Fine Particulate Matter (PM2.5)</td>
+      <td>Mean</td>
+      <td>mcg per cubic meter</td>
+      <td>CD</td>
+      <td>503</td>
+      <td>Staten Island</td>
+      <td>2020</td>
+      <td>01/01/2020</td>
+      <td>5.32</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>3384 rows × 12 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Vehicle_and_Boat_Registrations_by_Fuel_Type_per_County.csv&quot;</span><span class="p">)</span>
+<span class="n">df3</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">df3</span><span class="p">[</span><span class="n">df3</span><span class="p">[</span><span class="s1">&#39;Record Type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;BOAT&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">df3</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">df3</span><span class="p">[</span><span class="n">df3</span><span class="p">[</span><span class="s1">&#39;Record Type&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;TRL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">nyc_counties</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;NEW YORK&#39;</span><span class="p">,</span> <span class="s1">&#39;KINGS&#39;</span><span class="p">,</span> <span class="s1">&#39;BRONX&#39;</span><span class="p">,</span> <span class="s1">&#39;RICHMOND&#39;</span><span class="p">,</span> <span class="s1">&#39;QUEENS&#39;</span><span class="p">]</span>
+<span class="n">df3</span> <span class="o">=</span> <span class="n">df3</span><span class="p">[</span><span class="n">df3</span><span class="p">[</span><span class="s1">&#39;County&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">nyc_counties</span><span class="p">)]</span>
+
+<span class="n">fuel_other</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;COMP N/G&#39;</span><span class="p">,</span> <span class="s1">&#39;FLEX&#39;</span><span class="p">,</span> <span class="s1">&#39;OTHER&#39;</span><span class="p">,</span> <span class="s1">&#39;NONE&#39;</span><span class="p">,</span> <span class="s1">&#39;PROPANE&#39;</span><span class="p">]</span>
+<span class="n">fuel_dieselgas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;DIESEL&#39;</span><span class="p">,</span> <span class="s1">&#39;GAS&#39;</span><span class="p">]</span>
+<span class="n">df3</span><span class="p">[</span><span class="s1">&#39;Fuel Type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df3</span><span class="p">[</span><span class="s1">&#39;Fuel Type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">fuel_other</span><span class="p">,</span> <span class="s1">&#39;OTHER&#39;</span><span class="p">)</span>
+<span class="n">df3</span><span class="p">[</span><span class="s1">&#39;Fuel Type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df3</span><span class="p">[</span><span class="s1">&#39;Fuel Type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">fuel_dieselgas</span><span class="p">,</span> <span class="s1">&#39;GAS/DIESEL&#39;</span><span class="p">)</span>
+
+<span class="n">df3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Record Type</th>
+      <th>Fuel Type</th>
+      <th>County</th>
+      <th>Registration Class</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>37</th>
+      <td>VEH</td>
+      <td>OTHER</td>
+      <td>BRONX</td>
+      <td>733</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>VEH</td>
+      <td>GAS/DIESEL</td>
+      <td>BRONX</td>
+      <td>10501</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>VEH</td>
+      <td>ELECTRIC</td>
+      <td>BRONX</td>
+      <td>1939</td>
+    </tr>
+    <tr>
+      <th>40</th>
+      <td>VEH</td>
+      <td>OTHER</td>
+      <td>BRONX</td>
+      <td>234</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>VEH</td>
+      <td>GAS/DIESEL</td>
+      <td>BRONX</td>
+      <td>277579</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>VEH</td>
+      <td>OTHER</td>
+      <td>BRONX</td>
+      <td>110</td>
+    </tr>
+    <tr>
+      <th>43</th>
+      <td>VEH</td>
+      <td>OTHER</td>
+      <td>BRONX</td>
+      <td>43</td>
+    </tr>
+    <tr>
+      <th>44</th>
+      <td>VEH</td>
+      <td>OTHER</td>
+      <td>BRONX</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>345</th>
+      <td>VEH</td>
+      <td>OTHER</td>
+      <td>KINGS</td>
+      <td>57</td>
+    </tr>
+    <tr>
+      <th>346</th>
+      <td>VEH</td>
+      <td>GAS/DIESEL</td>
+      <td>KINGS</td>
+      <td>17695</td>
+    </tr>
+    <tr>
+      <th>347</th>
+      <td>VEH</td>
+      <td>ELECTRIC</td>
+      <td>KINGS</td>
+      <td>9072</td>
+    </tr>
+    <tr>
+      <th>348</th>
+      <td>VEH</td>
+      <td>OTHER</td>
+      <td>KINGS</td>
+      <td>478</td>
+    </tr>
+    <tr>
+      <th>349</th>
+      <td>VEH</td>
+      <td>GAS/DIESEL</td>
+      <td>KINGS</td>
+      <td>524051</td>
+    </tr>
+    <tr>
+      <th>350</th>
+      <td>VEH</td>
+      <td>OTHER</td>
+      <td>KINGS</td>
+      <td>456</td>
+    </tr>
+    <tr>
+      <th>351</th>
+      <td>VEH</td>
+      <td>OTHER</td>
+      <td>KINGS</td>
+      <td>304</td>
+    </tr>
+    <tr>
+      <th>352</th>
+      <td>VEH</td>
+      <td>OTHER</td>
+      <td>KINGS</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <th>449</th>
+      <td>VEH</td>
+      <td>OTHER</td>
+      <td>NEW YORK</td>
+      <td>241</td>
+    </tr>
+    <tr>
+      <th>450</th>
+      <td>VEH</td>
+      <td>GAS/DIESEL</td>
+      <td>NEW YORK</td>
+      <td>5935</td>
+    </tr>
+    <tr>
+      <th>451</th>
+      <td>VEH</td>
+      <td>ELECTRIC</td>
+      <td>NEW YORK</td>
+      <td>5453</td>
+    </tr>
+    <tr>
+      <th>452</th>
+      <td>VEH</td>
+      <td>OTHER</td>
+      <td>NEW YORK</td>
+      <td>284</td>
+    </tr>
+    <tr>
+      <th>453</th>
+      <td>VEH</td>
+      <td>GAS/DIESEL</td>
+      <td>NEW YORK</td>
+      <td>241411</td>
+    </tr>
+    <tr>
+      <th>454</th>
+      <td>VEH</td>
+      <td>OTHER</td>
+      <td>NEW YORK</td>
+      <td>668</td>
+    </tr>
+    <tr>
+      <th>455</th>
+      <td>VEH</td>
+      <td>OTHER</td>
+      <td>NEW YORK</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <th>456</th>
+      <td>VEH</td>
+      <td>OTHER</td>
+      <td>NEW YORK</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>616</th>
+      <td>VEH</td>
+      <td>OTHER</td>
+      <td>QUEENS</td>
+      <td>281</td>
+    </tr>
+    <tr>
+      <th>617</th>
+      <td>VEH</td>
+      <td>GAS/DIESEL</td>
+      <td>QUEENS</td>
+      <td>30570</td>
+    </tr>
+    <tr>
+      <th>618</th>
+      <td>VEH</td>
+      <td>ELECTRIC</td>
+      <td>QUEENS</td>
+      <td>8347</td>
+    </tr>
+    <tr>
+      <th>619</th>
+      <td>VEH</td>
+      <td>OTHER</td>
+      <td>QUEENS</td>
+      <td>938</td>
+    </tr>
+    <tr>
+      <th>620</th>
+      <td>VEH</td>
+      <td>GAS/DIESEL</td>
+      <td>QUEENS</td>
+      <td>812791</td>
+    </tr>
+    <tr>
+      <th>621</th>
+      <td>VEH</td>
+      <td>OTHER</td>
+      <td>QUEENS</td>
+      <td>1426</td>
+    </tr>
+    <tr>
+      <th>622</th>
+      <td>VEH</td>
+      <td>OTHER</td>
+      <td>QUEENS</td>
+      <td>101</td>
+    </tr>
+    <tr>
+      <th>623</th>
+      <td>VEH</td>
+      <td>OTHER</td>
+      <td>QUEENS</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>648</th>
+      <td>VEH</td>
+      <td>OTHER</td>
+      <td>RICHMOND</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>649</th>
+      <td>VEH</td>
+      <td>GAS/DIESEL</td>
+      <td>RICHMOND</td>
+      <td>5121</td>
+    </tr>
+    <tr>
+      <th>650</th>
+      <td>VEH</td>
+      <td>ELECTRIC</td>
+      <td>RICHMOND</td>
+      <td>2255</td>
+    </tr>
+    <tr>
+      <th>651</th>
+      <td>VEH</td>
+      <td>OTHER</td>
+      <td>RICHMOND</td>
+      <td>182</td>
+    </tr>
+    <tr>
+      <th>652</th>
+      <td>VEH</td>
+      <td>GAS/DIESEL</td>
+      <td>RICHMOND</td>
+      <td>277591</td>
+    </tr>
+    <tr>
+      <th>653</th>
+      <td>VEH</td>
+      <td>OTHER</td>
+      <td>RICHMOND</td>
+      <td>71</td>
+    </tr>
+    <tr>
+      <th>654</th>
+      <td>VEH</td>
+      <td>OTHER</td>
+      <td>RICHMOND</td>
+      <td>37</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df4</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;Electric_Vehicle_Registrations.csv&quot;</span><span class="p">)</span>
+<span class="n">nyc_counties</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;NEW YORK&#39;</span><span class="p">,</span> <span class="s1">&#39;KINGS&#39;</span><span class="p">,</span> <span class="s1">&#39;BRONX&#39;</span><span class="p">,</span> <span class="s1">&#39;RICHMOND&#39;</span><span class="p">,</span> <span class="s1">&#39;QUEENS&#39;</span><span class="p">]</span>
+<span class="n">df4</span> <span class="o">=</span> <span class="n">df4</span><span class="p">[</span><span class="n">df4</span><span class="p">[</span><span class="s1">&#39;County&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">nyc_counties</span><span class="p">)]</span>
+
+<span class="n">df4</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Record Type</th>
+      <th>VIN</th>
+      <th>Registration Class</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Zip</th>
+      <th>County</th>
+      <th>Model Year</th>
+      <th>Make</th>
+      <th>Body Type</th>
+      <th>Fuel Type</th>
+      <th>Unladen Weight</th>
+      <th>Maximum Gross Weight</th>
+      <th>Passengers</th>
+      <th>Reg Valid Date</th>
+      <th>Reg Expiration Date</th>
+      <th>Color</th>
+      <th>Scofflaw Indicator</th>
+      <th>Suspension Indicator</th>
+      <th>Revocation Indicator</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>VEH</td>
+      <td>9106843</td>
+      <td>SRF</td>
+      <td>GLENDALE</td>
+      <td>NY</td>
+      <td>11385</td>
+      <td>QUEENS</td>
+      <td>1974</td>
+      <td>EVA</td>
+      <td>4DSD</td>
+      <td>ELECTRIC</td>
+      <td>2180.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>09/21/2021</td>
+      <td>10/03/2023</td>
+      <td>BR</td>
+      <td>N</td>
+      <td>N</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>VEH</td>
+      <td>9A204759</td>
+      <td>SPC</td>
+      <td>BROOKLYN</td>
+      <td>NY</td>
+      <td>11211</td>
+      <td>KINGS</td>
+      <td>2014</td>
+      <td>CROWN</td>
+      <td>P/SH</td>
+      <td>ELECTRIC</td>
+      <td>3335.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>12/15/2022</td>
+      <td>12/31/2023</td>
+      <td>WH</td>
+      <td>N</td>
+      <td>N</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>VEH</td>
+      <td>9A112938</td>
+      <td>SPC</td>
+      <td>MASPETH</td>
+      <td>NY</td>
+      <td>11378</td>
+      <td>QUEENS</td>
+      <td>2000</td>
+      <td>CROWN</td>
+      <td>SWT</td>
+      <td>ELECTRIC</td>
+      <td>8640.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>12/08/2022</td>
+      <td>12/31/2023</td>
+      <td>WH</td>
+      <td>N</td>
+      <td>N</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>VEH</td>
+      <td>8FBE18U22845</td>
+      <td>SPC</td>
+      <td>NEW YORK</td>
+      <td>NY</td>
+      <td>10002</td>
+      <td>NEW YORK</td>
+      <td>2022</td>
+      <td>TOYOT</td>
+      <td>P/SH</td>
+      <td>ELECTRIC</td>
+      <td>5370.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>12/28/2022</td>
+      <td>12/31/2023</td>
+      <td>BK</td>
+      <td>N</td>
+      <td>N</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>VEH</td>
+      <td>7TYFZACD6NF000024</td>
+      <td>MOT</td>
+      <td>BRONX</td>
+      <td>NY</td>
+      <td>10468</td>
+      <td>BRONX</td>
+      <td>2022</td>
+      <td>FL/EB</td>
+      <td>MCY</td>
+      <td>ELECTRIC</td>
+      <td>320.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>05/04/2023</td>
+      <td>04/30/2024</td>
+      <td>RD</td>
+      <td>N</td>
+      <td>N</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>95453</th>
+      <td>VEH</td>
+      <td>A976B09580U</td>
+      <td>SPC</td>
+      <td>BROOKLYN</td>
+      <td>NY</td>
+      <td>11232</td>
+      <td>KINGS</td>
+      <td>2020</td>
+      <td>YALE</td>
+      <td>P/SH</td>
+      <td>ELECTRIC</td>
+      <td>11950.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>11/09/2022</td>
+      <td>12/31/2023</td>
+      <td>YW</td>
+      <td>N</td>
+      <td>N</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <th>95454</th>
+      <td>VEH</td>
+      <td>A976B08198T</td>
+      <td>SPC</td>
+      <td>BROOKLYN</td>
+      <td>NY</td>
+      <td>11232</td>
+      <td>KINGS</td>
+      <td>2019</td>
+      <td>YALE</td>
+      <td>SWT</td>
+      <td>ELECTRIC</td>
+      <td>6790.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>11/09/2022</td>
+      <td>12/31/2023</td>
+      <td>YW</td>
+      <td>N</td>
+      <td>N</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <th>95455</th>
+      <td>VEH</td>
+      <td>A976B07325S</td>
+      <td>SPC</td>
+      <td>BROOKLYN</td>
+      <td>NY</td>
+      <td>11232</td>
+      <td>KINGS</td>
+      <td>2018</td>
+      <td>YALE</td>
+      <td>P/SH</td>
+      <td>ELECTRIC</td>
+      <td>5000.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>11/09/2022</td>
+      <td>12/31/2023</td>
+      <td>YW</td>
+      <td>N</td>
+      <td>N</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <th>95456</th>
+      <td>VEH</td>
+      <td>A969N02801M</td>
+      <td>PSD</td>
+      <td>CORONA</td>
+      <td>NY</td>
+      <td>11368</td>
+      <td>QUEENS</td>
+      <td>2014</td>
+      <td>YALE</td>
+      <td>P/SH</td>
+      <td>ELECTRIC</td>
+      <td>5654.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>07/18/2014</td>
+      <td>NaN</td>
+      <td>YW</td>
+      <td>N</td>
+      <td>N</td>
+      <td>N</td>
+    </tr>
+    <tr>
+      <th>95457</th>
+      <td>VEH</td>
+      <td>A83T50116</td>
+      <td>PSD</td>
+      <td>CORONA</td>
+      <td>NY</td>
+      <td>11368</td>
+      <td>QUEENS</td>
+      <td>2010</td>
+      <td>TCM</td>
+      <td>P/SH</td>
+      <td>ELECTRIC</td>
+      <td>7650.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>08/06/2014</td>
+      <td>NaN</td>
+      <td>YW</td>
+      <td>N</td>
+      <td>N</td>
+      <td>N</td>
+    </tr>
+  </tbody>
+</table>
+<p>27066 rows × 20 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dftest2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;ny_ev_registrations.csv&quot;</span><span class="p">)</span>
+
+<span class="n">dftest2</span><span class="p">[</span><span class="s1">&#39;Registration Valid Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">dftest2</span><span class="p">[</span><span class="s1">&#39;Registration Valid Date&#39;</span><span class="p">])</span>
+
+<span class="n">dftest2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>ZIP Code</th>
+      <th>Registration Valid Date</th>
+      <th>DMV ID</th>
+      <th>Registration</th>
+      <th>VIN Prefix</th>
+      <th>Vehicle ID</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>13104</td>
+      <td>2020-10-01</td>
+      <td>62</td>
+      <td>Original</td>
+      <td>YV4BR0DL7M</td>
+      <td>18096911</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>13104</td>
+      <td>2020-10-01</td>
+      <td>48</td>
+      <td>Original</td>
+      <td>YV4BR0DL7M</td>
+      <td>18096911</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>13104</td>
+      <td>2020-10-01</td>
+      <td>46</td>
+      <td>Original</td>
+      <td>YV4BR0DL7M</td>
+      <td>18096911</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>13104</td>
+      <td>2020-10-01</td>
+      <td>55</td>
+      <td>Original</td>
+      <td>YV4BR0DL7M</td>
+      <td>18096911</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>13104</td>
+      <td>2020-10-01</td>
+      <td>53</td>
+      <td>Original</td>
+      <td>YV4BR0DL7M</td>
+      <td>18096911</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2810086</th>
+      <td>11375</td>
+      <td>2020-01-01</td>
+      <td>47</td>
+      <td>Renewal</td>
+      <td>5YJSA1E25L</td>
+      <td>13183473</td>
+    </tr>
+    <tr>
+      <th>2810087</th>
+      <td>11375</td>
+      <td>2020-01-01</td>
+      <td>57</td>
+      <td>Renewal</td>
+      <td>5YJSA1E25L</td>
+      <td>13183473</td>
+    </tr>
+    <tr>
+      <th>2810088</th>
+      <td>11375</td>
+      <td>2020-01-01</td>
+      <td>44</td>
+      <td>Renewal</td>
+      <td>5YJSA1E25L</td>
+      <td>13183473</td>
+    </tr>
+    <tr>
+      <th>2810089</th>
+      <td>11375</td>
+      <td>2020-01-01</td>
+      <td>50</td>
+      <td>Renewal</td>
+      <td>5YJSA1E25L</td>
+      <td>13183473</td>
+    </tr>
+    <tr>
+      <th>2810090</th>
+      <td>10023</td>
+      <td>2020-04-01</td>
+      <td>41</td>
+      <td>Original</td>
+      <td>WP0AC2Y19L</td>
+      <td>17817602</td>
+    </tr>
+  </tbody>
+</table>
+<p>2810091 rows × 6 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df5</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;epa_pm25.xlsx&#39;</span><span class="p">)</span> 
+<span class="n">agg</span> <span class="o">=</span> <span class="n">df5</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;SCC LEVEL 1&#39;</span><span class="p">)[</span><span class="s1">&#39;Emissions (Tons)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">aggregated_data_modified</span> <span class="o">=</span> <span class="n">agg</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span>
+<span class="n">categories_to_sum</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Highway Vehicles&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Highway Vehicles - Compressed Natural Gas (CNG)&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;Highway Vehicles - Diesel&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;Highway Vehicles - Electricity&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;Highway Vehicles - Ethanol (E-85)&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;Highway Vehicles - Gasoline&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Off-highway Vehicles&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Off-highway Vehicle CNG&#39;</span><span class="p">,</span>
+                             <span class="s1">&#39;Off-highway Vehicle Diesel&#39;</span><span class="p">,</span>
+                             <span class="s1">&#39;Off-highway Vehicle Gasoline&#39;</span><span class="p">,</span>
+                             <span class="s1">&#39;Off-highway Vehicle LPG&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Other&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Agriculture Production - Crops&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;Agriculture Production - Livestock&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;Open Burning&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;Pleasure Craft&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;Mining and Quarrying: SIC 10 and SIC 14&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;Railroad Equipment&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;Other Combustion&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;Marine Vessels, Commercial&#39;</span><span class="p">]}</span>
+<span class="k">for</span> <span class="n">category</span><span class="p">,</span> <span class="n">columns</span> <span class="ow">in</span> <span class="n">categories_to_sum</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">category_sum</span> <span class="o">=</span> <span class="n">aggregated_data_modified</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">columns</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">aggregated_data_modified</span> <span class="o">=</span> <span class="n">aggregated_data_modified</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span>
+    <span class="n">aggregated_data_modified</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">category</span><span class="p">]</span> <span class="o">=</span> <span class="n">category_sum</span>
+<span class="n">aggregated_data_modified</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Emissions (Tons)</th>
+    </tr>
+    <tr>
+      <th>SCC LEVEL 1</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Commercial/Institutional</th>
+      <td>812.237033</td>
+    </tr>
+    <tr>
+      <th>Construction: SIC 15 - 17</th>
+      <td>1598.399946</td>
+    </tr>
+    <tr>
+      <th>Food and Kindred Products: SIC 20</th>
+      <td>9252.338585</td>
+    </tr>
+    <tr>
+      <th>Industrial</th>
+      <td>814.439496</td>
+    </tr>
+    <tr>
+      <th>Paved Roads</th>
+      <td>623.599970</td>
+    </tr>
+    <tr>
+      <th>Residential</th>
+      <td>366.371873</td>
+    </tr>
+    <tr>
+      <th>Highway Vehicles</th>
+      <td>489.538536</td>
+    </tr>
+    <tr>
+      <th>Off-highway Vehicles</th>
+      <td>686.060053</td>
+    </tr>
+    <tr>
+      <th>Other</th>
+      <td>306.842469</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "myenv"
+        },
+        kernelOptions: {
+            name: "myenv",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'myenv'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="DataStories.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><center> The relation between electric vehicles and air quality in New York City </center></p>
+      </div>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
