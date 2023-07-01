@@ -18,69 +18,20 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# Imports
-import plotly.graph_objs as go
-import plotly.express as px
-import matplotlib.pyplot as plt
+dftest2 = pd.read_csv("ny_ev_registrations.csv")
 
-import seaborn as sns
-import matplotlib.patches as mpatches
-import fiona
-import numpy as np
-import pandas as pd
-import geopandas as gpd
-import importnb
-from ipywidgets import interact
-from importnb import Notebook
-with Notebook():
-    import cleaned_data
+dftest2['Registration Valid Date'] = pd.to_datetime(dftest2['Registration Valid Date'])
 
-df1 = cleaned_data.df1
-df2 = cleaned_data.df2
-df2_copy = cleaned_data.df2_copy
-df3 = cleaned_data.df3
-df4 = cleaned_data.df4
-dftest2 = cleaned_data.dftest2
-aggregated_data_modified = cleaned_data.aggregated_data_modified
+dftest2
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mFileNotFoundError[0m                         Traceback (most recent call last)
-Cell [0;32mIn[1], line 16[0m
-[1;32m     14[0m [38;5;28;01mfrom[39;00m [38;5;21;01mimportnb[39;00m [38;5;28;01mimport[39;00m Notebook
-[1;32m     15[0m [38;5;28;01mwith[39;00m Notebook():
-[0;32m---> 16[0m     [38;5;28;01mimport[39;00m [38;5;21;01mcleaned_data[39;00m
-[1;32m     18[0m df1 [38;5;241m=[39m cleaned_data[38;5;241m.[39mdf1
-[1;32m     19[0m df2 [38;5;241m=[39m cleaned_data[38;5;241m.[39mdf2
-
-File [0;32m<frozen importlib._bootstrap>:1178[0m, in [0;36m_find_and_load[0;34m(name, import_)[0m
-
-File [0;32m<frozen importlib._bootstrap>:1149[0m, in [0;36m_find_and_load_unlocked[0;34m(name, import_)[0m
-
-File [0;32m<frozen importlib._bootstrap>:690[0m, in [0;36m_load_unlocked[0;34m(spec)[0m
-
-File [0;32m~/miniconda3/envs/jupyterbook/lib/python3.11/site-packages/importnb/loader.py:189[0m, in [0;36mLoader.exec_module[0;34m(self, module)[0m
-[1;32m    186[0m [38;5;28;01mif[39;00m alias:
-[1;32m    187[0m     sys[38;5;241m.[39mmodules[38;5;241m.[39mpop(alias, [38;5;28;01mNone[39;00m)
-[0;32m--> 189[0m [38;5;28;01mraise[39;00m e
-
-File [0;32m~/miniconda3/envs/jupyterbook/lib/python3.11/site-packages/importnb/loader.py:180[0m, in [0;36mLoader.exec_module[0;34m(self, module)[0m
-[1;32m    174[0m     [38;5;28;01mraise[39;00m [38;5;167;01mImportError[39;00m(
-[1;32m    175[0m         [38;5;124mf[39m[38;5;124m"[39m[38;5;124mcannot load module [39m[38;5;132;01m{[39;00mmodule[38;5;241m.[39m[38;5;18m__name__[39m[38;5;132;01m!r}[39;00m[38;5;124m when [39m[38;5;124m"[39m [38;5;124m"[39m[38;5;124mget_code() returns None[39m[38;5;124m"[39m
-[1;32m    176[0m     )
-[1;32m    178[0m [38;5;28;01mif[39;00m inspect[38;5;241m.[39mCO_COROUTINE [38;5;129;01mnot[39;00m [38;5;129;01min[39;00m _get_co_flags_set(code[38;5;241m.[39mco_flags):
-[1;32m    179[0m     [38;5;66;03m# if there isn't any async non sense then we proceed with convention.[39;00m
-[0;32m--> 180[0m     [43mbootstrap[49m[38;5;241;43m.[39;49m[43m_call_with_frames_removed[49m[43m([49m[43mexec[49m[43m,[49m[43m [49m[43mcode[49m[43m,[49m[43m [49m[43mmodule[49m[38;5;241;43m.[39;49m[38;5;18;43m__dict__[39;49m[43m)[49m
-[1;32m    181[0m [38;5;28;01melse[39;00m:
-[1;32m    182[0m     [38;5;28mself[39m[38;5;241m.[39maexec_module_sync(module)
-
-File [0;32m~/UvA/Datavis/storytest/Datastorytest/files/cleaned_data.ipynb:1866[0m
-[1;32m   1686[0m df4 [38;5;241m=[39m df4[df4[[38;5;124m'[39m[38;5;124mCounty[39m[38;5;124m'[39m][38;5;241m.[39misin(nyc_counties)]
-[1;32m   1688[0m df4
-[0;32m-> 1866[0m dftest2 [38;5;241m=[39m [43mpd[49m[38;5;241;43m.[39;49m[43mread_csv[49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43mny_ev_registrations.csv[39;49m[38;5;124;43m"[39;49m[43m)[49m
-[1;32m   1868[0m dftest2[[38;5;124m'[39m[38;5;124mRegistration Valid Date[39m[38;5;124m'[39m] [38;5;241m=[39m pd[38;5;241m.[39mto_datetime(dftest2[[38;5;124m'[39m[38;5;124mRegistration Valid Date[39m[38;5;124m'[39m])
-[1;32m   1870[0m dftest2
+Cell [0;32mIn[7], line 1[0m
+[0;32m----> 1[0m dftest2 [38;5;241m=[39m [43mpd[49m[38;5;241;43m.[39;49m[43mread_csv[49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43mny_ev_registrations.csv[39;49m[38;5;124;43m"[39;49m[43m)[49m
+[1;32m      3[0m dftest2[[38;5;124m'[39m[38;5;124mRegistration Valid Date[39m[38;5;124m'[39m] [38;5;241m=[39m pd[38;5;241m.[39mto_datetime(dftest2[[38;5;124m'[39m[38;5;124mRegistration Valid Date[39m[38;5;124m'[39m])
+[1;32m      5[0m dftest2
 
 File [0;32m~/miniconda3/envs/jupyterbook/lib/python3.11/site-packages/pandas/io/parsers/readers.py:912[0m, in [0;36mread_csv[0;34m(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)[0m
 [1;32m    899[0m kwds_defaults [38;5;241m=[39m _refine_defaults_read(
